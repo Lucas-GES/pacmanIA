@@ -91,18 +91,31 @@ class Pacman():
             return False
         else:
             return True
+
+    def game_over():
+        count = 0
+        for i in range(len(Pacman.labirinto)):
+                for j in range(len(Pacman.labirinto[0])):
+                    if Pacman.labirinto[i][j] == ".":
+                        count += 1                   
         
+        if count == 0:
+            return True
+        else:
+            return False
 
 if __name__ == '__main__':
 
     Pacman.novoJogo()
     
-    while Pacman.game_over == False:
+    while Pacman.game_over() == False:
         os.system('cls||clear')
         Pacman.ambiente(Pacman.labirinto)
         print(Pacman.get_posicao())
         Pacman.mover(input())
-        
+    
+    os.system('cls||clear')
+    Pacman.ambiente(Pacman.labirinto)   
 
 
     
