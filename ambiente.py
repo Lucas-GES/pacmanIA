@@ -1,17 +1,20 @@
+import os
 class Pacman(): 
-    jogador = ' C '
+    jogador = 'C'
+
+    game_over = False
 
     labirinto = [
-            ["__","__","__","___","___","___","___","___","___",],
-            ["|","   "," | ","   ","   ","    ","  | ","   ","|",],
-            ["|","   "," | ","   ","----","   ","  | ","   ","|",],
-            ["|"," . "," . "," . ","  . "," . ","  . "," . ","|",],
-            ["|"," . "," -- ","  ","_  _","   "," -- "," . ","|",],
-            ["|"," . ","    ","  ","|__|","   ","    "," . ","|"],
-            ["|"," . "," -- ","   ","   "," . "," -- "," . ","|",],
-            ["|"," . ","   ","   ","____"," . "," . ","  . ","|",],
-            ["|","   "," | ","   ","    ","   ","  | ","   ","|",],
-            ["---","---","---","---","---","-","---","---","---",],
+            ["_","_","_","_","_","_","_","_","_",],
+            ["|","*","#","*","*","*","#","*","|"],
+            ["|","*","#","*","#","*","#","*","|"],
+            ["|","*","*",".","*","*","*","*","|"],
+            ["|",".","*","*","*","*","*","*","|"],
+            ["|","*","*","*","#","*","*",".","|"],
+            ["|","*","#","*","*","*","#","*","|"],
+            ["|","*","*","*","#","*","#","*","|"],
+            ["|","*","#",".","*","*","#","*","|"],
+            ["-","-","-","-","-","-","-","-","-",],
         ]
 
     def ambiente(labirinto):        
@@ -22,10 +25,16 @@ class Pacman():
                     print(labirinto[i][j])
                 else:
                     print(str(labirinto[i][j]) + "", end="")
-                    
-    def novoJogador():
-        jogador = ' C '
-        return jogador
+
+    
+    def get_posicao():
+        for i in range(len(Pacman.labirinto)):
+            for j in range(len(Pacman.labirinto[0])):
+                if Pacman.labirinto[i][j] == 'C':
+                    x = i
+                    y = j
+                    return x, y
+
 
     def novoJogo():
         jogador = Pacman.jogador
@@ -42,17 +51,58 @@ class Pacman():
             for i in range(len(Pacman.labirinto)):
                 for j in range(len(Pacman.labirinto[0])):
                     if Pacman.labirinto[i][j] == Pacman.jogador:
-                        a = j-1
-                        Pacman.labirinto[i][a] = Pacman.jogador
-                        Pacman.labirinto[i][j] = "   "
+                        y = j-1
+                        if Pacman.valida_movimento(i, y):
+                            Pacman.labirinto[i][y] = Pacman.jogador
+                            Pacman.labirinto[i][j] = "*"
+
+        elif movimento == "d":
+            for i in range(len(Pacman.labirinto)):
+                for j in range(len(Pacman.labirinto[0])):
+                    if Pacman.labirinto[i][j] == Pacman.jogador:
+                        y = j+1
+                        if Pacman.valida_movimento(i, y):
+                            Pacman.labirinto[i][y] = Pacman.jogador
+                            Pacman.labirinto[i][j] = "*"
+                            break
+        
+        elif movimento == "w":
+            for i in range(len(Pacman.labirinto)):
+                for j in range(len(Pacman.labirinto[0])):
+                    if Pacman.labirinto[i][j] == Pacman.jogador:
+                        x = i-1
+                        if Pacman.valida_movimento(x, j):
+                            Pacman.labirinto[x][j] = Pacman.jogador
+                            Pacman.labirinto[i][j] = "*"
+                            break
+
+        elif movimento == "s":
+            for i in reversed(range(len(Pacman.labirinto))):
+                for j in range(len(Pacman.labirinto[0])):
+                    if Pacman.labirinto[i][j] == Pacman.jogador:
+                        x = i+1
+                        if Pacman.valida_movimento(x, j):
+                            Pacman.labirinto[x][j] = Pacman.jogador
+                            Pacman.labirinto[i][j] = "*"
+                            break
+
+    def valida_movimento(x, y):
+        if(Pacman.labirinto[x][y] == '#' or Pacman.labirinto[x][y] == '|' or Pacman.labirinto[x][y] == '-' or Pacman.labirinto[x][y] == '_'):
+            return False
+        else:
+            return True
         
 
 if __name__ == '__main__':
 
     Pacman.novoJogo()
-    Pacman.ambiente(Pacman.labirinto)
-    Pacman.mover(input())
-    Pacman.ambiente(Pacman.labirinto)  
+    
+    while Pacman.game_over == False:
+        os.system('cls||clear')
+        Pacman.ambiente(Pacman.labirinto)
+        print(Pacman.get_posicao())
+        Pacman.mover(input())
+        
 
 
     
