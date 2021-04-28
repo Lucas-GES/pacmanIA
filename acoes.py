@@ -9,7 +9,7 @@ class Acoes():
                         y = j-1
                         if Acoes.valida_movimento(i, y):
                             Ambiente.labirinto[i][y] = Ambiente.jogador
-                            Ambiente.labirinto[i][j] = "*"
+                            Ambiente.labirinto[i][j] = " "
 
         elif movimento == "d":
             for i in range(len(Ambiente.labirinto)):
@@ -18,7 +18,7 @@ class Acoes():
                         y = j+1
                         if Acoes.valida_movimento(i, y):
                             Ambiente.labirinto[i][y] = Ambiente.jogador
-                            Ambiente.labirinto[i][j] = "*"
+                            Ambiente.labirinto[i][j] = " "
                             break
         
         elif movimento == "w":
@@ -28,7 +28,7 @@ class Acoes():
                         x = i-1
                         if Acoes.valida_movimento(x, j):
                             Ambiente.labirinto[x][j] = Ambiente.jogador
-                            Ambiente.labirinto[i][j] = "*"
+                            Ambiente.labirinto[i][j] = " "
                             break
 
         elif movimento == "s":
@@ -38,7 +38,7 @@ class Acoes():
                         x = i+1
                         if Acoes.valida_movimento(x, j):
                             Ambiente.labirinto[x][j] = Ambiente.jogador
-                            Ambiente.labirinto[i][j] = "*"
+                            Ambiente.labirinto[i][j] = " "
                             break
 
     def valida_movimento(x, y):

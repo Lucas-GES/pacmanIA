@@ -9,7 +9,7 @@ class Jogo():
 
         for i in range(len(Ambiente.labirinto)):
             for j in range(len(Ambiente.labirinto[0])):
-                if i == 6:
+                if i == 8:
                     if  j == 4:
                         Ambiente.labirinto[i][j] = jogador
 
