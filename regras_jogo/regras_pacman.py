@@ -6,16 +6,16 @@ class RegrasPacman():
     def __init__(self) -> None:
         super().__init__()
         labirinto_completo = [
-            ["_","_","_","_","_","_","_","_","_",],
-            ["|"," ","|"," "," "," ","|"," ","|"],
-            ["|","_",".","_","_","_"," ","_","|"],
-            ["|","|","."," "," "," "," ","|","|"],
-            ["|"," ","."," "," "," "," "," ","|"],
-            ["|","|",".","_"," ","_"," ","|","|"],
-            ["|","-",".","|","_","|"," ","-","|"],
-            ["|"," ",".",".","_"," "," "," ","|"],
-            ["|"," ","|","."," "," ","|"," ","|"],
-            ["_","_","_","_","_","_","_","_","_",],
+            ["█","█","█","█","█","█","█","█","█","█","█","█"],
+            ["█"," "," "," "," "," "," "," "," "," "," ","█"],
+            ["█"," "," ",".","█","█","█"," "," ","█"," ","█"],
+            ["█"," ","█","."," "," "," "," ","█","█"," ","█"],
+            ["█"," "," ","."," "," "," "," "," "," "," ","█"],
+            ["█"," ","█",".","█"," ","█"," ","█"," "," ","█"],
+            ["█"," ","█",".","█","█","█"," ","█"," "," ","█"],
+            ["█"," "," ",".",".","█"," "," "," "," "," ","█"],
+            ["█"," "," ","█","."," "," ","█"," ","█"," ","█"],
+            ["█","█","█","█","█","█","█","█","█","█","█","█"],
         ]
         self.labirinto = labirinto_completo
         self.id_personagens = {Personagens.JOGADOR_PACMAN: 0}
@@ -25,7 +25,7 @@ class RegrasPacman():
         self.inserirJogador()
         
     def valida_movimento(self, x, y):
-        if(self.labirinto[x][y] == '#' or self.labirinto[x][y] == '|' or self.labirinto[x][y] == '-' or self.labirinto[x][y] == '_'):
+        if(self.labirinto[x][y] == '█'):
             return False
         else:
             return True
@@ -86,7 +86,7 @@ class RegrasPacman():
         for i in range(len(self.labirinto)):
             for j in range(len(self.labirinto[0])):
                 if i == 8:
-                    if j == 4:
+                    if j == 5:
                         self.labirinto[i][j] = self.jogador
     
     def get_jogador(self):
@@ -124,7 +124,7 @@ class RegrasPacman():
     def print_labirinto(self):
         for i in range(len(self.labirinto)):                
             for j in range(len(self.labirinto[0])):                
-                if j == 8:
+                if j == 11:
                     print(self.labirinto[i][j])
                 else:
                     print(str(self.labirinto[i][j]) + "", end="")
